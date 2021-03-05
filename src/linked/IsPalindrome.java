@@ -72,6 +72,7 @@ public class IsPalindrome {
             slow = slow.next;
             fast = fast.next.next;
         }
+        //当fast不为null时，slow.next才是需要反转链表的头节点
         if (fast!=null){
             slow = slow.next;
         }
