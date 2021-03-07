@@ -42,6 +42,7 @@ public class GetIntersectionNode {
      * 2.通过遍历链表A和链表B，获取链表长度
      * 3.如果长度一样，就直接遍历，对比对象地址即可。
      * 4.如果长度不一样，就先移动长链表，没移动一次，链表长度-1。当链表长度一致时，重复第3步操作
+     * 时间复杂度：O(n)
      * @return 相交的节点
      */
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
@@ -100,6 +101,7 @@ public class GetIntersectionNode {
     /**
      * 双指针版本，就是说如果一个链表遍历完了就去遍历另外一个链表。其实这个操作和上面操作是类似的，因为走完自己去走别人就是让第二次遍历时，能让更长链表的遍历和长度和长度小的链表一致。
      * 这个方法相当于是把上面的三种情况合在一起了，很牛逼的想法。需要通过画图才能想的出来
+     * 时间复杂度为O(mn)
      */
     public ListNode getIntersectionNodeByDoublePointer(ListNode headA, ListNode headB) {
         if (headA==headB){
