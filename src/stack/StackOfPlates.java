@@ -53,12 +53,14 @@ public class StackOfPlates {
 
     public void push(int val) {
         head.next = new ListNode(val,head.next,head);
+        if (head.next.next!=null){
+            head.next.next.pre = head.next;
+        }
         if (numArray[num]>=stackSize){
             ++num;
         }
         listNodes[num]=head.next;
         numArray[num]++;
-
     }
 
     public int pop() {
@@ -89,14 +91,22 @@ public class StackOfPlates {
         }
         int tmpVal = listNodes[index].val;
         listNodes[index].pre.next = listNodes[index].next;
-        if (--numArray[num]==0){
-            while (listNodes!=)
+        listNodes[index] = listNodes[index].next;
+        if (--numArray[index]==0){
+            //移动栈
+            for(int i=index+1;i<=num;i++){
+                if (listNodes[i]!=null){
+                    listNodes[(i-1)] = listNodes[i];
+                    numArray[(i-1)] = numArray[i];
+                }
+            }
+            --num;
         }
         return tmpVal;
     }
 
     private boolean isEmptyOrNotExist(int stackNum){
-        return listNodes[stackNum]==null;
+        return listNodes[stackNum]==null||numArray[stackNum]==0;
     }
 
     /**
@@ -115,11 +125,12 @@ public class StackOfPlates {
     }
 
     public static void main(String[] args) {
-        StackOfPlates stackOfPlates = new StackOfPlates(1);
+        StackOfPlates stackOfPlates = new StackOfPlates(2);
         stackOfPlates.push(1);
         stackOfPlates.push(2);
-        stackOfPlates.popAt(1);
-        stackOfPlates.pop();
-        stackOfPlates.pop();
+        stackOfPlates.push(3);
+        stackOfPlates.popAt(0);
+        stackOfPlates.popAt(0);
+        stackOfPlates.popAt(0);
     }
 }
