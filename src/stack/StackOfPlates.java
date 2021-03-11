@@ -70,6 +70,9 @@ public class StackOfPlates {
             //栈为空时，需要删除栈，并且栈指针-1
             if (--numArray[num]==0){
                 listNodes[num--] = null;
+                if (num<0){
+                    num=0;
+                }
             }
             return tmp.val;
         }
@@ -100,7 +103,9 @@ public class StackOfPlates {
                     numArray[(i-1)] = numArray[i];
                 }
             }
-            --num;
+            if (--num<0){
+                num = 0;
+            }
         }
         return tmpVal;
     }
@@ -125,12 +130,24 @@ public class StackOfPlates {
     }
 
     public static void main(String[] args) {
-        StackOfPlates stackOfPlates = new StackOfPlates(2);
-        stackOfPlates.push(1);
+        StackOfPlates stackOfPlates = new StackOfPlates(6);
+       /* stackOfPlates.push(1);
         stackOfPlates.push(2);
         stackOfPlates.push(3);
         stackOfPlates.popAt(0);
         stackOfPlates.popAt(0);
-        stackOfPlates.popAt(0);
+        stackOfPlates.popAt(0);*/
+       stackOfPlates.pop();
+       stackOfPlates.pop();
+       stackOfPlates.popAt(1);
+       stackOfPlates.popAt(3);
+       stackOfPlates.pop();
+        stackOfPlates.push(40);
+        stackOfPlates.push(44);
+        stackOfPlates.push(44);
+        stackOfPlates.pop();
+        stackOfPlates.push(24);
+        stackOfPlates.push(42);
+        stackOfPlates.pop();
     }
 }

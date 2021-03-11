@@ -1,11 +1,13 @@
-package linked;
+package stack;
 
 /**
  * 堆盘子最快版本，采用链表+数组实现。其中数组存储的是单个栈的内容，链表表示不同的栈
  */
 public class StackOfPlatesFastest {
     int length;
+    //链表头节点，永远指向第一个栈的栈底
     node head;
+    //链表尾节点，指向最后一个栈的栈底，链表只记录了栈底对象的信息，对象里面的arr记录了这个栈内容信息
     node curNode;
     public StackOfPlatesFastest(int cap) {
         length = cap;
@@ -66,6 +68,7 @@ public class StackOfPlatesFastest {
     }
 
     class node {
+        //逆序存储节点，第0个是栈底
         int[] arr;
         int index;
         node next;
