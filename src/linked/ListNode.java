@@ -8,10 +8,10 @@ package linked;
  * @date 2021-03-01 10:22:44
  */
 public class ListNode {
-    int val;
-    ListNode next;
+    public int val;
+    public ListNode next;
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 }
