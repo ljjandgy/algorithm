@@ -63,4 +63,8 @@ public class IsValidBST {
        }
        return checkNode(root.right);
     }
+
+    public static void main(String[] args) {
+
+    }
 }
