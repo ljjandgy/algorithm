@@ -32,9 +32,14 @@ public class CheckSubTree {
      * 3.如果遍历出现不一致，就继续向下遍历查找。然后重复1,2步操作
      */
     public boolean checkSubTree(TreeNode t1, TreeNode t2) {
-        TreeNode t1Tmp = t1;
-        while (t1Tmp!=null&&t1Tmp.val!=t2.val){
-            t1
-        }
+        if (t2 == null) return true;
+        if (t1 == null) return false;
+        //要么当前节点一致，要么左子树一致，要么右子树一致
+        return isTreeEql(t1, t2) || checkSubTree(t1.left, t2) || checkSubTree(t1.right, t2);
+    }
+    private boolean isTreeEql(TreeNode t1, TreeNode t2) {
+        if (t1 == t2) return true;
+        if (t1 == null || t2 == null) return false;
+        return t1.val == t2.val && isTreeEql(t1.left, t2.left) && isTreeEql(t1.right, t2.right);
     }
 }
