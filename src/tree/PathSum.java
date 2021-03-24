@@ -40,11 +40,13 @@ public class PathSum {
      */
     private int count;
 
-    private int[] route = new int[10000];
+    private int[] route;
 
-    private int index = 0;
+    private int index;
 
     public int pathSum(TreeNode root, int sum) {
+        index = 0;
+        route = new int[10000];
         checkSum(root,sum);
         pathSum(root.left,sum);
         pathSum(root.right,sum);
