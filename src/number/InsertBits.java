@@ -21,34 +21,29 @@ package number;
 public class InsertBits {
     /**
      * 题目分析：
-     * 题目核心就在于让m的二进制信息去替换n的特定位置的二进制信息，并且需要高位补0
+     * 题目核心就在于让m的二进制信息去替换n的特定位置的二进制信息，并且需要高位补0。所以直接采用位运算即可
      * 解题步骤：
-     * 1.定义一个数组，记录N的二进制信息
-     * 2.求M的二进制信息，然后按着替换i-j，如果最后指针没有到j，则全部补0
+     * 先把数N的j到i之间的位置0
+     * M左移i位
+     * 再用N或运算M
+     *
+     * 例 N = 1011 1111, M = 101, i = 2, j = 4
+     *      (1<<(j-i+1))-1)<<i = 0001 1100
+     * 取反后
+     *      1110 0011
+     * 对N于运算
+     *      1011 1111 & 1110 0011 = 1010 0011
+     * M左移动i位
+     *     101 << i = 0001 0100
+     * 最后M|N
+     *     0001 0100 | 1010 0011 = 1011 0111 = 183
      */
     public int insertBits(int N, int M, int i, int j) {
-        StringBuilder sb = new StringBuilder();
-        int tmp = N/2;
-        while(tmp>0){
-            if (tmp==1){
-                sb.append("0");
-            }else{
-                sb.append("1");
-            }
-            tmp = tmp/2;
-        }
-        char[] c = sb.toString().toCharArray();
-        tmp = M/2;
-        int index = i;
-        while (index!=j){
-            if (tmp<2){
-                c[index++] = '0';
-            }else{
-                c[index++] = '1';
-            }
-            tmp = tmp/2;
-        }
-
+        int mask=((1<<(j-i+1))-1)<<i;
+        mask=~mask;
+        N&=mask;
+        M=M<<i;
+        return M|N;
     }
 
 }
