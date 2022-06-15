@@ -1,6 +1,7 @@
 package array;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * 求一个数组的全部子集
