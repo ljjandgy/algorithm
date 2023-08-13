@@ -59,6 +59,28 @@ public class IsBalanced {
         return (left>right?left:right)+1;
     }
 
+    /**
+     * 官方解法
+     * 利用-1这个特殊的数字来标识递归中已经出现了高度大于1的情况
+     * 这个解法是自最底层往上，判断每棵树是否是平衡二叉树，一旦有一个不是，就返回-1
+     */
+    public boolean isBalancedOther(TreeNode root) {
+        return height(root) >= 0;
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        } else {
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
+    }
+
     public static void main(String[] args) {
         IsBalanced isBalanced = new IsBalanced();
         TreeNode root = new TreeNode(1);
