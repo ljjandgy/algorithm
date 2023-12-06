@@ -1,5 +1,8 @@
 package array;
 
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
 public class MaxScore {
     /**
      * 解题方法：最小堆
