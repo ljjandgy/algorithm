@@ -13,7 +13,13 @@ public class Rob {
      * @return
      */
     public int rob(int[] nums) {
+        /**
+         * 没偷上个房间的最大值
+         */
         int prev = 0;
+        /**
+         * 偷了上个房间的最大值。和prev中间差了个房间，正好满足不相邻的要求
+         */
         int curr = 0;
 
         // 每次循环，计算“偷到当前房子为止的最大金额”
@@ -21,10 +27,19 @@ public class Rob {
             // 循环开始时，curr 表示 dp[k-1]，prev 表示 dp[k-2]
             // dp[k] = max{ dp[k-1], dp[k-2] + i }
             //从第一个房间解释就是判断是偷第一个房间+第三个房间还是偷第二个房间
+            //其实就两种偷钱逻辑，就是偷不偷最后个房间的区别
+            //这个代码是核心代码，含义是如果偷了这个房间的钱，还没有偷上个房间得到的钱多，就偷上个房间，毕竟相邻的房间不能偷
             int temp = Math.max(curr, prev + i);
             prev = curr;
             curr = temp;
             // 循环结束时，curr 表示 dp[k]，prev 表示 dp[k-1]
         }
+        return curr;
+    }
+
+    public static void main(String[] args) {
+        Rob rob = new Rob();
+        int[] num = {1,7,6,1,1};
+        System.out.println(rob.rob(num));
     }
 }
