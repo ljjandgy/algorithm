@@ -66,6 +66,7 @@ public class Merge {
         int tail = m + n - 1;
         int cur;
         while (p1 >= 0 || p2 >= 0) {
+            //取出最大的数，然后从后往前放，这样不用移动数组内的数值
             if (p1 == -1) {
                 cur = nums2[p2--];
             } else if (p2 == -1) {
