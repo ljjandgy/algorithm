@@ -61,4 +61,42 @@ public class MaxProfitTwo {
         }
         return maxprofit;
     }
+
+    /**
+     * 动态规划解法：
+     * 本质就是利用前一天持股与不持股的利润和今天持股与不持股的利润进行比较，判断啥时候卖，啥时候买，寻找所有完整的波峰波谷，从而实现利润最大化。针对这到题，还是贪心好理解
+     * @param prices
+     * @return
+     */
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if (len < 2) {
+            return 0;
+        }
+
+        // cash：持有现金
+        // hold：持有股票
+        // 状态转移：cash → hold → cash → hold → cash → hold → cash
+        //不持有股票的利润
+        int cash = 0;
+        //持有股票的利润，一开始如果选择了持有股票，那么利润肯定是负数
+        int hold = -prices[0];
+
+        int preCash = cash;
+        int preHold = hold;
+        for (int i = 1; i < len; i++) {
+            //可以找到一个波峰波谷周期买入与卖出
+            //preHold + prices[i] 表示昨天持有股票，并且今天卖出股票的话能有多少总利润，通过这个数值的不断叠加，就能获取最大利润
+            //今天卖的利润
+            cash = Math.max(preCash, preHold + prices[i]);
+            //今天不卖的利润 preCash - prices[i] 表示今天如果买入股票的话利润是多少，针对价格上升的场景，这个值肯定比preHold前一天买入股票的利润要低，因为股票价格上升了，
+            // 针对价格下降的场景，则会比preHold要高，这表明前一天卖的话能赚钱，就会导致hold值变大，相当于积累了一次利润了
+            hold = Math.max(preHold, preCash - prices[i]);
+
+            preCash = cash;
+            preHold = hold;
+        }
+        return cash;
+
+    }
 }
